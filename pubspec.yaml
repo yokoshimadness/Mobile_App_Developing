@@ -17,3 +17,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  
+  assets:
+    - assets/images/pagenavigation/page_profile.png
+    - assets/images/pagenavigation/page_home.png
+    - assets/images/page_home_logo.png
+    - assets/images/profile-user.png
