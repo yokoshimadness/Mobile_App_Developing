@@ -19,11 +19,7 @@ flutter:
   uses-material-design: true
   
   assets:
-    - assets/images/cloud.png
-    - assets/images/start.png
-    - assets/images/error.png
-    - assets/images/sun.png
-    - assets/images/snow.jpg
-    - assets/images/rain.png
-    - assets/images/thunderstorm.png
-    - assets/images/fog.png
+    - assets/images/pagenavigation/page_profile.png
+    - assets/images/pagenavigation/page_home.png
+    - assets/images/page_home_logo.png
+    - assets/images/profile-user.png
