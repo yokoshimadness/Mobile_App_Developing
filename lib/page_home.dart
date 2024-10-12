@@ -1,8 +1,48 @@
+import 'package:finance_manager_yankovych_ki_401/abstract_storage.dart';
 import 'package:finance_manager_yankovych_ki_401/imp_widgets.dart';
+import 'package:finance_manager_yankovych_ki_401/shared_preferences_storage.dart';
 import 'package:flutter/material.dart';
 
-class PageHome extends StatelessWidget {
+class PageHome extends StatefulWidget {
   const PageHome({super.key});
+
+  @override
+  State<PageHome> createState() => _PageHomeState();
+}
+
+class _PageHomeState extends State<PageHome> {
+  final LocalStorage storage = SharedPreferencesStorage();
+  String? _name;
+
+  int _selectedIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  void _loadUserData() async {
+    final name = await storage.getData('name');
+
+    setState(() {
+      _name = name;
+    });
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    if (index == 0) {
+      Navigator.pushReplacementNamed(context, '/home');
+    } else if (index == 1) {
+      Navigator.pushReplacementNamed(context, '/transactions');
+    } else if (index == 2) {
+      Navigator.pushReplacementNamed(context, '/profile');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,20 +50,33 @@ class PageHome extends StatelessWidget {
         title: const Text('Home'),
         automaticallyImplyLeading: false,
       ),
-      body: const Center(
+      body: Padding(
+        padding: const EdgeInsets.all(16),
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(
-              image: AssetImage('assets/images/page_home_logo.png'),
-              width: 300,
-              height: 300,
+            if (_name != null)
+              Text(
+                'Welcome, $_name',
+                style: const TextStyle(fontSize: 24),
+                textAlign: TextAlign.center,
+              ),
+            const SizedBox(height: 20),
+            const SizedBox(height: 20),
+            Center(
+              child: Image.asset(
+                'assets/images/page_home_logo.png',
+                width: 100,
+                height: 100,
+              ),
             ),
-            Text('Home Page', style: TextStyle(fontSize: 24)),
+            const SizedBox(height: 20),
           ],
         ),
       ),
-      bottomNavigationBar: const PageNavigator(),
+      bottomNavigationBar: PageNavigator(
+        selectedIndex: _selectedIndex,
+        onItemTapped: _onItemTapped,
+      ),
     );
   }
 }
