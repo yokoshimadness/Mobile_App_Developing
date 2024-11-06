@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:finance_manager_yankovych_ki_401/abstract_storage.dart';
 import 'package:finance_manager_yankovych_ki_401/imp_widgets.dart';
 import 'package:finance_manager_yankovych_ki_401/shared_preferences_storage.dart';
@@ -20,11 +21,14 @@ class _PageTransactionsState extends State<PageTransactions> {
   String _description = '';
 
   int _selectedIndex = 1;
+  bool isOnline = true;
 
   @override
   void initState() {
     super.initState();
     _loadTransactions();
+    _checkInitialConnection();
+    _startListeningToConnectionChanges();
   }
 
   void _loadTransactions() async {
@@ -95,6 +99,49 @@ class _PageTransactionsState extends State<PageTransactions> {
     }
   }
 
+  Future<void> _checkInitialConnection() async {
+    final result = await Connectivity().checkConnectivity();
+    setState(() {
+      isOnline = result != ConnectivityResult.none;
+    });
+
+    if (!isOnline) {
+      _showNoConnectionDialog();
+    }
+  }
+
+  void _startListeningToConnectionChanges() {
+    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+      setState(() {
+        isOnline = result.first != ConnectivityResult.none;
+      });
+
+      if (!isOnline) {
+        _showNoConnectionDialog();
+      }
+    });
+  }
+
+  void _showNoConnectionDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('No Internet Connection'),
+          content: const Text('Please check your internet connection to use the app.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -140,13 +187,21 @@ class _PageTransactionsState extends State<PageTransactions> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          _addTransaction('Income');
+                          if (isOnline) {
+                            _addTransaction('Income');
+                          } else {
+                            _showNoConnectionDialog();
+                          }
                         },
                         child: const Text('Add Income'),
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          _addTransaction('Expense');
+                          if (isOnline) {
+                            _addTransaction('Expense');
+                          } else {
+                            _showNoConnectionDialog();
+                          }
                         },
                         child: const Text('Add Expense'),
                       ),

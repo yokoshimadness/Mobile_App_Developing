@@ -26,6 +26,7 @@ MERGED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovyc
 INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\android\app\src\debug\AndroidManifest.xml:1:1-7:12
+MERGED from [:connectivity_plus] D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-9:12
 MERGED from [:shared_preferences_android] D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.fragment:fragment:1.7.1] C:\Users\slowdance\.gradle\caches\transforms-3\a49cd171355a6a39687e69f028c8bcbc\transformed\fragment-1.7.1\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.window:window:1.2.0] C:\Users\slowdance\.gradle\caches\transforms-3\3e108fe9d597d03770ae82acaebb5b63\transformed\jetified-window-1.2.0\AndroidManifest.xml:17:1-31:12
@@ -82,6 +83,8 @@ uses-sdk
 INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\android\app\src\debug\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\android\app\src\debug\AndroidManifest.xml
 INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\android\app\src\debug\AndroidManifest.xml
+MERGED from [:connectivity_plus] D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
+MERGED from [:connectivity_plus] D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences_android] D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences_android] D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\shared_preferences_android\intermediates\merged_manifest\debug\AndroidManifest.xml:5:5-44
 MERGED from [androidx.fragment:fragment:1.7.1] C:\Users\slowdance\.gradle\caches\transforms-3\a49cd171355a6a39687e69f028c8bcbc\transformed\fragment-1.7.1\AndroidManifest.xml:5:5-44
@@ -142,6 +145,10 @@ MERGED from [androidx.window.extensions.core:core:1.0.0] C:\Users\slowdance\.gra
 		INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\android\app\src\debug\AndroidManifest.xml
 	android:minSdkVersion
 		INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\android\app\src\debug\AndroidManifest.xml
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [:connectivity_plus] D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:7:5-79
+	android:name
+		ADDED from [:connectivity_plus] D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\connectivity_plus\intermediates\merged_manifest\debug\AndroidManifest.xml:7:22-76
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.2.0] C:\Users\slowdance\.gradle\caches\transforms-3\3e108fe9d597d03770ae82acaebb5b63\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
 	android:required
