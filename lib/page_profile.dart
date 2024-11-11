@@ -1,3 +1,4 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:finance_manager_yankovych_ki_401/abstract_storage.dart';
 import 'package:finance_manager_yankovych_ki_401/imp_widgets.dart';
 import 'package:finance_manager_yankovych_ki_401/shared_preferences_storage.dart';
@@ -22,12 +23,15 @@ class _PageProfileState extends State<PageProfile> {
   double totalIncome = 0;
   double totalExpense = 0;
   double totalBalance = 0;
+  bool isOnline = true;
 
   @override
   void initState() {
     super.initState();
     _loadUserData();
     _loadFinancialData();
+    _checkInitialConnection();
+    _startListeningToConnectionChanges();
   }
 
   void _loadUserData() async {
@@ -50,6 +54,25 @@ class _PageProfileState extends State<PageProfile> {
       totalIncome = double.tryParse(incomeData ?? '0') ?? 0;
       totalExpense = double.tryParse(expenseData ?? '0') ?? 0;
       totalBalance = totalIncome - totalExpense;
+    });
+  }
+
+  void _checkInitialConnection() async {
+    final result = await Connectivity().checkConnectivity();
+    setState(() {
+      isOnline = result != ConnectivityResult.none;
+    });
+  }
+
+  void _startListeningToConnectionChanges() {
+    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+      setState(() {
+        isOnline = result.first != ConnectivityResult.none;
+      });
+
+      if (!isOnline) {
+        _showNoConnectionDialog();
+      }
     });
   }
 
@@ -78,8 +101,35 @@ class _PageProfileState extends State<PageProfile> {
     return emailRegExp.hasMatch(email);
   }
 
-  void _logout() {
-    Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false);
+  void _logout() async {
+    final shouldLogout = await showDialog<bool>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Log Out'),
+          content: const Text('Are you sure you want to log out?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Cancel'),
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+            ),
+            TextButton(
+              child: const Text('Log Out'),
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+            ),
+          ],
+        );
+      },
+    );
+
+    if (shouldLogout == true) {
+      await storage.saveData('isLoggedOut', 'true');
+      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false, arguments: isOnline);
+    }
   }
 
   int _selectedIndex = 2;
@@ -100,6 +150,26 @@ class _PageProfileState extends State<PageProfile> {
   double _calculatePercentage(double value) {
     final double total = totalIncome + totalExpense;
     return total > 0 ? (value / total) * 100 : 0;
+  }
+
+  void _showNoConnectionDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('No Internet Connection'),
+          content: const Text('Please check your internet connection and try again.'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
   }
 
   @override
@@ -126,8 +196,7 @@ class _PageProfileState extends State<PageProfile> {
                   padding: EdgeInsets.all(16),
                   child: CircleAvatar(
                     radius: 40,
-                    backgroundImage:
-                        AssetImage('assets/images/profile-user.png'),
+                    backgroundImage: AssetImage('assets/images/profile-user.png'),
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.transparent,
                   ),
@@ -201,20 +270,14 @@ class _PageProfileState extends State<PageProfile> {
                     PieChartSectionData(
                       value: totalIncome,
                       title:
-                          // ignore: lines_longer_than_80_chars
-                          'Income\n${totalIncome.toStringAsFixed(2)}\n(${_calculatePercentage(
-                        totalIncome,
-                      ).toStringAsFixed(1)}%)',
+                          'Income\n${totalIncome.toStringAsFixed(2)}\n(${_calculatePercentage(totalIncome).toStringAsFixed(1)}%)',
                       color: Colors.green,
                       radius: 60,
                     ),
                     PieChartSectionData(
                       value: totalExpense,
                       title:
-                          // ignore: lines_longer_than_80_chars
-                          'Expense\n${totalExpense.toStringAsFixed(2)}\n(${_calculatePercentage(
-                        totalExpense,
-                      ).toStringAsFixed(1)}%)',
+                          'Expense\n${totalExpense.toStringAsFixed(2)}\n(${_calculatePercentage(totalExpense).toStringAsFixed(1)}%)',
                       color: Colors.red,
                       radius: 60,
                     ),

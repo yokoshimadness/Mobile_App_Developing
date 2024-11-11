@@ -11,6 +11,8 @@ dependencies:
     sdk: flutter
   shared_preferences: ^2.0.15
   fl_chart: ^0.40.0
+  connectivity_plus: ^6.1.0
+  http: ^1.2.2
 dev_dependencies:
   flutter_test:
     sdk: flutter
