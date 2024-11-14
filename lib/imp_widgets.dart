@@ -83,20 +83,23 @@ class PageNavigator extends StatelessWidget {
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: ImageIcon(
-              AssetImage('assets/images/pagenavigation/page_home.png'),
-              size: 30,),
+            AssetImage('assets/images/pagenavigation/page_home.png'),
+            size: 30,
+          ),
           label: 'Home',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(
-              AssetImage('assets/images/pagenavigation/page_transactions.png'),
-              size: 30,),
+            AssetImage('assets/images/pagenavigation/page_transactions.png'),
+            size: 30,
+          ),
           label: 'Transactions',
         ),
         BottomNavigationBarItem(
           icon: ImageIcon(
-              AssetImage('assets/images/pagenavigation/page_profile.png'),
-              size: 30,),
+            AssetImage('assets/images/pagenavigation/page_profile.png'),
+            size: 30,
+          ),
           label: 'Profile',
         ),
       ],

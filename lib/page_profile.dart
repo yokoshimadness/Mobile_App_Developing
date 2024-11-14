@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_function_invocation, unrelated_type_equality_checks, lines_longer_than_80_chars, use_build_context_synchronously
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:finance_manager_yankovych_ki_401/abstract_storage.dart';
 import 'package:finance_manager_yankovych_ki_401/imp_widgets.dart';
@@ -65,7 +67,9 @@ class _PageProfileState extends State<PageProfile> {
   }
 
   void _startListeningToConnectionChanges() {
-    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+    Connectivity()
+        .onConnectivityChanged
+        .listen((List<ConnectivityResult> result) {
       setState(() {
         isOnline = result.first != ConnectivityResult.none;
       });
@@ -128,7 +132,8 @@ class _PageProfileState extends State<PageProfile> {
 
     if (shouldLogout == true) {
       await storage.saveData('isLoggedOut', 'true');
-      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false, arguments: isOnline);
+      Navigator.pushNamedAndRemoveUntil(context, '/login', (route) => false,
+          arguments: isOnline,);
     }
   }
 
@@ -158,7 +163,8 @@ class _PageProfileState extends State<PageProfile> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('No Internet Connection'),
-          content: const Text('Please check your internet connection and try again.'),
+          content: const Text(
+              'Please check your internet connection and try again.',),
           actions: [
             TextButton(
               onPressed: () {
@@ -196,7 +202,8 @@ class _PageProfileState extends State<PageProfile> {
                   padding: EdgeInsets.all(16),
                   child: CircleAvatar(
                     radius: 40,
-                    backgroundImage: AssetImage('assets/images/profile-user.png'),
+                    backgroundImage:
+                        AssetImage('assets/images/profile-user.png'),
                     foregroundColor: Colors.white,
                     backgroundColor: Colors.transparent,
                   ),

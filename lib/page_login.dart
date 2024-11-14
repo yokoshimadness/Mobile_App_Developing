@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, inference_failure_on_function_invocation, lines_longer_than_80_chars
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:finance_manager_yankovych_ki_401/abstract_storage.dart';
 import 'package:finance_manager_yankovych_ki_401/imp_widgets.dart';
@@ -24,7 +26,6 @@ class _PageLoginState extends State<PageLogin> {
     _startListeningToConnectionChanges();
     _checkInitialConnection();
     _checkAutoLogin();
-    
   }
 
   void _checkAutoLogin() async {
@@ -32,12 +33,17 @@ class _PageLoginState extends State<PageLogin> {
     final password = await storage.getData('password');
     final isLoggedOutString = await storage.getData('isLoggedOut');
 
-    if (email != null && password != null && isLoggedOutString != 'true' && isOnline) {
+    if (email != null &&
+        password != null &&
+        isLoggedOutString != 'true' &&
+        isOnline) {
       Navigator.pushReplacementNamed(context, '/home');
-    }
-    else if (email != null && password != null && isLoggedOutString != 'true' && !isOnline) {
-  _showNoConnectionDialog();
-  Navigator.pushReplacementNamed(context, '/home');
+    } else if (email != null &&
+        password != null &&
+        isLoggedOutString != 'true' &&
+        !isOnline) {
+      _showNoConnectionDialog();
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
@@ -49,7 +55,9 @@ class _PageLoginState extends State<PageLogin> {
   }
 
   void _startListeningToConnectionChanges() {
-    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+    Connectivity()
+        .onConnectivityChanged
+        .listen((List<ConnectivityResult> result) {
       setState(() {
         isOnline = result.first != ConnectivityResult.none;
       });
@@ -82,7 +90,8 @@ class _PageLoginState extends State<PageLogin> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('No Internet Connection'),
-          content: const Text('Please check your internet connection and try again.'),
+          content: const Text(
+              'Please check your internet connection and try again.',),
           actions: [
             TextButton(
               onPressed: () {
