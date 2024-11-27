@@ -1,7 +1,10 @@
+// ignore_for_file: use_build_context_synchronously, unrelated_type_equality_checks, lines_longer_than_80_chars
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:finance_manager_yankovych_ki_401/abstract_storage.dart';
 import 'package:finance_manager_yankovych_ki_401/imp_widgets.dart';
 import 'package:finance_manager_yankovych_ki_401/shared_preferences_storage.dart';
+import 'package:flashlight_plugin/flashlight_plugin.dart';
 import 'package:flutter/material.dart';
 
 class PageLogin extends StatefulWidget {
@@ -17,6 +20,7 @@ class _PageLoginState extends State<PageLogin> {
   final TextEditingController passwordController = TextEditingController();
   bool isOnline = true;
   bool isLoggedIn = false;
+  bool isFlashlightOn = false; // Додаємо змінну для відстеження стану ліхтарика
 
   @override
   void initState() {
@@ -24,7 +28,6 @@ class _PageLoginState extends State<PageLogin> {
     _startListeningToConnectionChanges();
     _checkInitialConnection();
     _checkAutoLogin();
-    
   }
 
   void _checkAutoLogin() async {
@@ -32,24 +35,31 @@ class _PageLoginState extends State<PageLogin> {
     final password = await storage.getData('password');
     final isLoggedOutString = await storage.getData('isLoggedOut');
 
-    if (email != null && password != null && isLoggedOutString != 'true' && isOnline) {
+    if (email != null &&
+        password != null &&
+        isLoggedOutString != 'true' &&
+        isOnline) {
       Navigator.pushReplacementNamed(context, '/home');
-    }
-    else if (email != null && password != null && isLoggedOutString != 'true' && !isOnline) {
-  _showNoConnectionDialog();
-  Navigator.pushReplacementNamed(context, '/home');
+    } else if (email != null &&
+        password != null &&
+        isLoggedOutString != 'true' &&
+        !isOnline) {
+      _showNoConnectionDialog();
+      Navigator.pushReplacementNamed(context, '/home');
     }
   }
 
   Future<void> _checkInitialConnection() async {
     final result = await Connectivity().checkConnectivity();
     setState(() {
-      isOnline = result.first != ConnectivityResult.none;
+      isOnline = result != ConnectivityResult.none;
     });
   }
 
   void _startListeningToConnectionChanges() {
-    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+    Connectivity()
+        .onConnectivityChanged
+        .listen((List<ConnectivityResult> result) {
       setState(() {
         isOnline = result.first != ConnectivityResult.none;
       });
@@ -57,6 +67,7 @@ class _PageLoginState extends State<PageLogin> {
   }
 
   void _showLoginSuccessDialog() {
+    // ignore: inference_failure_on_function_invocation
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -76,13 +87,44 @@ class _PageLoginState extends State<PageLogin> {
     );
   }
 
+  void toggleFlashlight(BuildContext context) {
+    setState(() {
+      isFlashlightOn = !isFlashlightOn;
+    });
+    FlashlightPlugin.toggleFlashlight(enable: isFlashlightOn).then((_) {
+      final statusMessage =
+          isFlashlightOn ? 'The flashlight is on!' : 'The flashlight is off!';
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            statusMessage,
+            style: const TextStyle(color: Colors.white),
+          ),
+          backgroundColor: Colors.black,
+          duration: const Duration(seconds: 2),
+        ),
+      );
+    }).catchError((e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Flashlight not supported on this platform.'),
+          backgroundColor: Colors.black,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    });
+  }
+
   void _showNoConnectionDialog() {
+    // ignore: inference_failure_on_function_invocation
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('No Internet Connection'),
-          content: const Text('Please check your internet connection and try again.'),
+          content: const Text(
+            'Please check your internet connection and try again.',
+          ),
           actions: [
             TextButton(
               onPressed: () {
@@ -102,6 +144,15 @@ class _PageLoginState extends State<PageLogin> {
       appBar: AppBar(
         title: const Text('Login'),
         automaticallyImplyLeading: false,
+        actions: [
+          IconButton(
+            icon: Icon(
+              isFlashlightOn ? Icons.wb_sunny : Icons.wb_sunny_outlined,
+              color: isFlashlightOn ? Colors.yellow : Colors.grey,
+            ),
+            onPressed: () => toggleFlashlight(context),
+          ),
+        ],
       ),
       body: Center(
         child: Padding(

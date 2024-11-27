@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:finance_manager_yankovych_ki_401/abstract_storage.dart';
 import 'package:finance_manager_yankovych_ki_401/imp_widgets.dart';
 import 'package:finance_manager_yankovych_ki_401/shared_preferences_storage.dart';
@@ -61,7 +63,6 @@ class PageRegister extends StatelessWidget {
                   await storage.saveData('email', emailController.text);
                   await storage.saveData('password', passwordController.text);
 
-                  // ignore: use_build_context_synchronously
                   Navigator.pushNamed(context, '/login');
                 },
                 child: const Text('Sign Up'),

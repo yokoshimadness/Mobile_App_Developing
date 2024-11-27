@@ -1,3 +1,5 @@
+// ignore_for_file: inference_failure_on_function_invocation, unrelated_type_equality_checks, lines_longer_than_80_chars
+
 import 'dart:convert';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:finance_manager_yankovych_ki_401/abstract_storage.dart';
@@ -111,7 +113,9 @@ class _PageTransactionsState extends State<PageTransactions> {
   }
 
   void _startListeningToConnectionChanges() {
-    Connectivity().onConnectivityChanged.listen((List<ConnectivityResult> result) {
+    Connectivity()
+        .onConnectivityChanged
+        .listen((List<ConnectivityResult> result) {
       setState(() {
         isOnline = result.first != ConnectivityResult.none;
       });
@@ -128,7 +132,9 @@ class _PageTransactionsState extends State<PageTransactions> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('No Internet Connection'),
-          content: const Text('Please check your internet connection to use the app.'),
+          content: const Text(
+            'Please check your internet connection to use the app.',
+          ),
           actions: [
             TextButton(
               onPressed: () {

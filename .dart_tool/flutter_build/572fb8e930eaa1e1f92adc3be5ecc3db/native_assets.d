@@ -1,1 +1,0 @@
- D:\\FUTUREWORK\\FLUTTER\\flutter_projects\\nulp\\finance_manager_yankovych_ki_401\\.dart_tool\\flutter_build\\572fb8e930eaa1e1f92adc3be5ecc3db\\native_assets.yaml: 
