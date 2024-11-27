@@ -13,6 +13,8 @@ dependencies:
   fl_chart: ^0.40.0
   connectivity_plus: ^6.1.0
   http: ^1.2.2
+  flashlight_plugin:
+    path: flashlight_plugin
 dev_dependencies:
   flutter_test:
     sdk: flutter

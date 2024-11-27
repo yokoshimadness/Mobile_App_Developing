@@ -28,4 +28,5 @@ com.example.finance_manager_yankovych_ki_401.app-packageDebugResources-26 D:\FUT
 com.example.finance_manager_yankovych_ki_401.app-packageDebugResources-27 D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\app\intermediates\incremental\debug\packageDebugResources\stripped.dir
 com.example.finance_manager_yankovych_ki_401.app-merged_res-28 D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\app\intermediates\merged_res\debug
 com.example.finance_manager_yankovych_ki_401.app-packaged_res-29 D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\connectivity_plus\intermediates\packaged_res\debug
-com.example.finance_manager_yankovych_ki_401.app-packaged_res-30 D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\shared_preferences_android\intermediates\packaged_res\debug
+com.example.finance_manager_yankovych_ki_401.app-packaged_res-30 D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\flashlight_plugin\intermediates\packaged_res\debug
+com.example.finance_manager_yankovych_ki_401.app-packaged_res-31 D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\build\shared_preferences_android\intermediates\packaged_res\debug

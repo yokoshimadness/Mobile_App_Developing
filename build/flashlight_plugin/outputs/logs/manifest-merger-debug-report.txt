@@ -1,0 +1,17 @@
+-- Merging decision tree log ---
+manifest
+ADDED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml:1:1-3:12
+INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml:1:1-3:12
+	package
+		ADDED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml:2:3-42
+		INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml:1:11-69
+uses-sdk
+INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml
+INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from D:\FUTUREWORK\FLUTTER\flutter_projects\nulp\finance_manager_yankovych_ki_401\flashlight_plugin\android\src\main\AndroidManifest.xml
